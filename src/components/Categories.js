@@ -7,7 +7,9 @@ const Categories = ({ onSelectCategory }) => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get("https://www.themealdb.com/api/json/v1/1/categories.php");
+        const response = await axios.get(
+          "https://www.themealdb.com/api/json/v1/1/categories.php"
+        );
         setCategories(response.data.categories);
       } catch (error) {
         console.log(error);
@@ -29,7 +31,10 @@ const Categories = ({ onSelectCategory }) => {
         }}
       >
         {categories.map((mainMeal) => (
-          <button key={mainMeal.idCategory} onClick={() => onSelectCategory(mainMeal.strCategory)}>
+          <button
+            key={mainMeal.idCategory}
+            onClick={() => onSelectCategory(mainMeal.strCategory)}
+          >
             {mainMeal.strCategory}
           </button>
         ))}

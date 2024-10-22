@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import Cards from "./components/Cards";
-import Categories from "./components/Categories";
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Details from "./pages/Details";
 
-const App = () => {
-  const [selectedCategory, setSelectedCategory] = useState("");
-
+function App() {
   return (
-    <div className="app-container">
-      <h1>React Cooking App</h1>
-      <Categories onSelectCategory={setSelectedCategory} />
-      <Cards fCategory={selectedCategory} />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/details/:idMeal" element={<Details />} />
+      </Routes>
+    </BrowserRouter>
   );
-};
+}
 
 export default App;

@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 
 const Cards = ({ fCategory }) => {
   const [meals, setMeals] = useState([]);
@@ -8,7 +9,9 @@ const Cards = ({ fCategory }) => {
     if (fCategory) {
       const fetchMeals = async () => {
         try {
-          const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${fCategory}`);
+          const response = await axios.get(
+            `https://www.themealdb.com/api/json/v1/1/filter.php?c=${fCategory}`
+          );
           setMeals(response.data.meals);
         } catch (error) {
           console.log(error);
@@ -24,10 +27,14 @@ const Cards = ({ fCategory }) => {
       <h1>Recipe Cards</h1>
       <div className="meals-container">
         {meals.map((meal) => (
-          <div key={meal.idMeal}>
-            <h2>{meal.strMeal}</h2>
+          <NavLink
+            to={`/details/${meal.idMeal}`}
+            className="meal-card"
+            key={meal.idMeal}
+          >
             <img src={meal.strMealThumb} alt={meal.strMeal} />
-          </div>
+            <h2>{meal.strMeal}</h2>
+          </NavLink>
         ))}
       </div>
     </div>
