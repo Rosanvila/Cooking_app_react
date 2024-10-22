@@ -44,3 +44,16 @@ p {
   -webkit-line-clamp: 8;
   overflow: hidden;
 }
+button {
+  padding: 10px 20px;
+  background: salmon;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+button:hover {
+  background: rgb(245, 33, 33);
+  transform: scale(1.1);
+  transition: ease .3s;
+}
