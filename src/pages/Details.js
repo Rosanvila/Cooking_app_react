@@ -4,7 +4,9 @@ import Recipe from '../components/Recipe';
 const Details = () => {
     return (
         <div className='meals-container'>
-        <Recipe />
+            <div className='meal-details'>
+            <Recipe />
+            </div>
         </div>
     );
 };

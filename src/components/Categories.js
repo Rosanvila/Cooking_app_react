@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
-const Categories = ({ onSelectCategory }) => {
+const Categories = ({ onSelectCategory, onResetCategory }) => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
@@ -39,6 +39,9 @@ const Categories = ({ onSelectCategory }) => {
           </button>
         ))}
       </div>
+      <button className="remove" onClick={onResetCategory}>
+        Back
+      </button>
     </div>
   );
 };

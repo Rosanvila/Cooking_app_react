@@ -6,26 +6,31 @@ const Cards = ({ fCategory }) => {
   const [meals, setMeals] = useState([]);
 
   useEffect(() => {
-    if (fCategory) {
-      const fetchMeals = async () => {
-        try {
-          const response = await axios.get(
-            `https://www.themealdb.com/api/json/v1/1/filter.php?c=${fCategory}`
-          );
-          setMeals(response.data.meals);
-        } catch (error) {
-          console.log(error);
-        }
-      };
+    const fetchMeals = async () => {
+      try {
+        const url = fCategory
+          ? `https://www.themealdb.com/api/json/v1/1/filter.php?c=${fCategory}`
+          : "https://www.themealdb.com/api/json/v1/1/search.php?s=";
+        const response = await axios.get(url);
+        setMeals(response.data.meals);
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-      fetchMeals();
-    }
-  }, [fCategory]);
+    fetchMeals();
+    }, [fCategory]);
+
+    useEffect(() => {
+    setMeals((prevMeals) => 
+      [...prevMeals].sort((a, b) => a.strMeal.localeCompare(b.strMeal))
+    );
+    }, [meals]);
 
   return (
     <div>
       <h1>Recipe Cards</h1>
-      <div className="meals-container">
+      <div className="card-container">
         {meals.map((meal) => (
           <NavLink
             to={`/details/${meal.idMeal}`}

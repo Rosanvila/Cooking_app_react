@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import axios from "axios";
 
 const Recipe = () => {
@@ -28,6 +28,9 @@ const Recipe = () => {
   return (
     <div>
       <h1>{meal.strMeal}</h1>
+      <NavLink to="/" className="remove">
+        <p>Back</p>
+      </NavLink>
       <img src={meal.strMealThumb} alt={meal.strMeal} />
       <p>{meal.strInstructions}</p>
     </div>
