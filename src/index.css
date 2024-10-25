@@ -96,7 +96,6 @@ button:hover {
 
 .remove {
   background: rgb(34, 34, 34);
-  margin-block-start: 1rem;
 }
 .remove:hover {
   background: rgb(151, 116, 3);

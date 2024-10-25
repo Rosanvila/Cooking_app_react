@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import ResetButton from "./ResetButton";
 
 const Categories = ({ onSelectCategory, onResetCategory }) => {
   const [categories, setCategories] = useState([]);
@@ -7,10 +8,9 @@ const Categories = ({ onSelectCategory, onResetCategory }) => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get(
-          "https://www.themealdb.com/api/json/v1/1/categories.php"
-        );
-        setCategories(response.data.categories);
+        await axios
+          .get("https://www.themealdb.com/api/json/v1/1/categories.php")
+          .then((response) => setCategories(response.data.categories));
       } catch (error) {
         console.log(error);
       }
@@ -39,9 +39,7 @@ const Categories = ({ onSelectCategory, onResetCategory }) => {
           </button>
         ))}
       </div>
-      <button className="remove" onClick={onResetCategory}>
-        Back
-      </button>
+      <ResetButton onResetCategory={onResetCategory} />
     </div>
   );
 };
