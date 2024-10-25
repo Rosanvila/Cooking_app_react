@@ -37,7 +37,7 @@ const Recipe = () => {
         {Object.keys(meal)
           .filter((key) => key.includes("strIngredient") && meal[key])
           .map((key) => (
-            <li key={key} >
+            <li key={key}>
               {meal[key]} - {meal[`strMeasure${key.slice(13)}`]}
             </li>
           ))}

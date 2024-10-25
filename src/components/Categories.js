@@ -1,9 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ResetButton from "./ResetButton";
 
-const Categories = ({ onSelectCategory, onResetCategory }) => {
+const Categories = ({ onSelectCategory, onResetCategory, setSearchQuery }) => {
   const [categories, setCategories] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -19,6 +21,12 @@ const Categories = ({ onSelectCategory, onResetCategory }) => {
     fetchCategories();
   }, []);
 
+  const handleSelecedCategory = (category) => {
+    onSelectCategory(category);
+    setSearchQuery("");
+    navigate(`/?categories=${category}`);
+  };
+
   return (
     <div>
       <h1>Categories</h1>
@@ -33,13 +41,13 @@ const Categories = ({ onSelectCategory, onResetCategory }) => {
         {categories.map((mainMeal) => (
           <button
             key={mainMeal.idCategory}
-            onClick={() => onSelectCategory(mainMeal.strCategory)}
+            onClick={() => handleSelecedCategory(mainMeal.strCategory)}
           >
             {mainMeal.strCategory}
           </button>
         ))}
       </div>
-      <ResetButton onResetCategory={onResetCategory} />
+      <ResetButton setSelectedCategory={onResetCategory} />
     </div>
   );
 };

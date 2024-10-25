@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import ResetButton from "./ResetButton";
+import { SearchContext } from "../contexts/SearchContext";
 
-const SearchBar = ({ setSearchQuery }) => {
+const SearchBar = () => {
   const [search, setSearch] = useState("");
   const { mealName } = useParams();
   const navigate = useNavigate();
+  const { setSearchQuery } = useContext(SearchContext);
 
   useEffect(() => {
     if (mealName) {
@@ -21,19 +23,14 @@ const SearchBar = ({ setSearchQuery }) => {
   const handleSearch = () => {
     setSearchQuery(search);
     navigate(`/?search=${search}`);
-  };
-
-  const onResetCategory = () => {
     setSearch("");
-    setSearchQuery("");
-    navigate("/");
   };
 
   return (
     <div className="container" style={{ marginBlockStart: "20px" }}>
       <input type="text" value={search} onChange={handleInputChange} />
       <button onClick={handleSearch}>Search</button>
-      <ResetButton onResetCategory={onResetCategory} />
+      <ResetButton setSearchQuery={setSearchQuery} />
     </div>
   );
 };

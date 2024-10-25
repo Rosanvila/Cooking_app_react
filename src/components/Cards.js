@@ -1,9 +1,11 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { SearchContext } from "../contexts/SearchContext";
 
-const Cards = ({ fCategory, searchQuery }) => {
+const Cards = ({ fCategory }) => {
   const [meals, setMeals] = useState([]);
+  const { searchQuery } = useContext(SearchContext);
 
   useEffect(() => {
     const fetchMeals = () => {
@@ -34,7 +36,7 @@ const Cards = ({ fCategory, searchQuery }) => {
 
   return (
     <div>
-      <h1>Recipe Cards</h1>
+      <h1>Résultat de la recherche : {searchQuery}</h1>
       <div className="card-container">
         {meals.map((meal) => (
           <NavLink

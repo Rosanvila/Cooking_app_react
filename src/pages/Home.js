@@ -27,6 +27,7 @@ const Home = () => {
       <Categories
         onSelectCategory={setSelectedCategory}
         onResetCategory={resetCategory}
+        setSearchQuery={setSearchQuery}
       />
       <SearchBar setSearchQuery={setSearchQuery} />
       <Cards fCategory={selectedCategory} searchQuery={searchQuery} />
