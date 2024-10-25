@@ -7,31 +7,27 @@ const Cards = ({ fCategory }) => {
   const [meals, setMeals] = useState([]);
   const { searchQuery } = useContext(SearchContext);
 
-  useEffect(() => {
-    const fetchMeals = () => {
-      let url;
-      if (searchQuery) {
-        url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchQuery}`;
-      } else if (fCategory) {
-        url = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${fCategory}`;
-      } else {
-        url = "https://www.themealdb.com/api/json/v1/1/search.php?s=";
-      }
+  useEffect(() =>{
+    let url;
+    if (searchQuery) {
+      url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchQuery}`;
+    } else if (fCategory) {
+      url = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${fCategory}`;
+    } else {
+      url = "https://www.themealdb.com/api/json/v1/1/search.php?s=";
+    }
 
-      axios
-        .get(url)
-        .then((response) => {
-          const sortedMeals = response.data.meals.sort((a, b) =>
-            a.strMeal.localeCompare(b.strMeal)
-          );
-          setMeals(sortedMeals);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    };
-
-    fetchMeals();
+    axios
+      .get(url)
+      .then((response) => {
+        const sortedMeals = response.data.meals.sort((a, b) =>
+          a.strMeal.localeCompare(b.strMeal)
+        );
+        setMeals(sortedMeals);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, [fCategory, searchQuery]);
 
   return (

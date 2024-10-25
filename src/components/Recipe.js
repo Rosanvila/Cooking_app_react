@@ -7,18 +7,14 @@ const Recipe = () => {
   const [meal, setMeal] = useState(null);
 
   useEffect(() => {
-    const fetchMealRecipe = async () => {
-      try {
-        const response = await axios.get(
-          `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idMeal}`
-        );
+    axios
+      .get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idMeal}`)
+      .then((response) => {
         setMeal(response.data.meals[0]);
-      } catch (error) {
+      })
+      .catch((error) => {
         console.log(error);
-      }
-    };
-
-    fetchMealRecipe();
+      });
   }, [idMeal]);
 
   if (!meal) {
