@@ -8,17 +8,14 @@ const Categories = ({ onSelectCategory, onResetCategory, setSearchQuery }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        await axios
-          .get("https://www.themealdb.com/api/json/v1/1/categories.php")
-          .then((response) => setCategories(response.data.categories));
-      } catch (error) {
+    axios
+      .get("https://www.themealdb.com/api/json/v1/1/categories.php")
+      .then((response) => {
+        setCategories(response.data.categories);
+      })
+      .catch((error) => {
         console.log(error);
-      }
-    };
-
-    fetchCategories();
+      });
   }, []);
 
   const handleSelecedCategory = (category) => {
