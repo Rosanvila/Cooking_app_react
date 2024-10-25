@@ -32,6 +32,16 @@ const Recipe = () => {
         <p>Back</p>
       </NavLink>
       <img src={meal.strMealThumb} alt={meal.strMeal} />
+      <h2>Ingredients</h2>
+      <ul>
+        {Object.keys(meal)
+          .filter((key) => key.includes("strIngredient") && meal[key])
+          .map((key) => (
+            <li key={key} >
+              {meal[key]} - {meal[`strMeasure${key.slice(13)}`]}
+            </li>
+          ))}
+      </ul>
       <p>{meal.strInstructions}</p>
     </div>
   );
