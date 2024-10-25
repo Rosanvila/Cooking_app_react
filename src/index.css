@@ -16,11 +16,18 @@ input {
   width: 300px;
   text-align: center;
   padding: 10px;
+  margin-inline-end: 1rem;
   font-size: 1rem;
-  margin-bottom: 20px;
   border-radius: 10px;
   border: 1px solid black;
 }
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .meals-container {
   display: flex;
   flex-direction: column;
@@ -84,7 +91,7 @@ button {
 button:hover {
   background: rgb(245, 33, 33);
   transform: scale(1.1);
-  transition: ease .3s;
+  transition: ease 0.3s;
 }
 
 .remove {
@@ -94,4 +101,3 @@ button:hover {
 .remove:hover {
   background: rgb(151, 116, 3);
 }
-

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Cards from "../components/Cards";
 import Categories from "../components/Categories";
+import SearchBar from "../components/SearchBar";
 
 const Home = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -16,6 +17,7 @@ const Home = () => {
         onSelectCategory={setSelectedCategory}
         onResetCategory={resetCategory}
       />
+      <SearchBar />
       <Cards fCategory={selectedCategory} />
     </div>
   );

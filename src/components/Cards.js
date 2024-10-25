@@ -12,20 +12,17 @@ const Cards = ({ fCategory }) => {
           ? `https://www.themealdb.com/api/json/v1/1/filter.php?c=${fCategory}`
           : "https://www.themealdb.com/api/json/v1/1/search.php?s=";
         const response = await axios.get(url);
-        setMeals(response.data.meals);
+        const sortedMeals = response.data.meals.sort((a, b) =>
+          a.strMeal.localeCompare(b.strMeal)
+        );
+        setMeals(sortedMeals);
       } catch (error) {
         console.log(error);
       }
     };
 
     fetchMeals();
-    }, [fCategory]);
-
-    useEffect(() => {
-    setMeals((prevMeals) => 
-      [...prevMeals].sort((a, b) => a.strMeal.localeCompare(b.strMeal))
-    );
-    }, [meals]);
+  }, [fCategory]);
 
   return (
     <div>
