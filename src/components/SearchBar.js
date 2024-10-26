@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import ResetButton from "./ResetButton";
 import { SearchContext } from "../contexts/SearchContext";
@@ -8,6 +8,7 @@ const SearchBar = () => {
   const { mealName } = useParams();
   const navigate = useNavigate();
   const { setSearchQuery } = useContext(SearchContext);
+  const handleInputChange = useRef();
 
   useEffect(() => {
     if (mealName) {
@@ -16,9 +17,7 @@ const SearchBar = () => {
     }
   }, [mealName, setSearchQuery]);
 
-  const handleInputChange = (ev) => {
-    setSearch(ev.target.value);
-  };
+
 
   const handleSearch = () => {
     setSearchQuery(search);
@@ -28,7 +27,7 @@ const SearchBar = () => {
 
   return (
     <div className="container" style={{ marginBlockStart: "20px" }}>
-      <input type="text" value={search} onChange={handleInputChange} />
+      <input type="text" value={search} ref={handleInputChange} onChange={() => setSearch(handleInputChange.current.value)} />
       <button onClick={handleSearch}>Search</button>
       <ResetButton setSearchQuery={setSearchQuery} />
     </div>
